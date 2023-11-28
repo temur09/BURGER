@@ -4,10 +4,10 @@ const food = {
         price: 10000,
         amout: 0,
         kcall: 500,
-        get calcSum (){
+        get calcSum() {
             return this.amout * this.price
         },
-        get kcallSum (){
+        get kcallSum() {
             return this.amout * this.kcall
         },
     },
@@ -16,10 +16,10 @@ const food = {
         price: 20500,
         amout: 0,
         kcall: 700,
-        get calcSum(){
+        get calcSum() {
             return this.amout * this.price
         },
-        get kcallSum(){
+        get kcallSum() {
             return this.amout * this.kcall
         },
     },
@@ -28,10 +28,10 @@ const food = {
         price: 31900,
         amout: 0,
         kcall: 800,
-        get calcSum(){
+        get calcSum() {
             return this.amout * this.price
         },
-        get kcallSum(){
+        get kcallSum() {
             return this.amout * this.kcall
         },
     },
@@ -56,7 +56,7 @@ function prepare(item) {
     let count = food[parentId].amout
     console.log(count)
 
-    if (sym == '+' && count<=100) {
+    if (sym == '+' && count <= 100) {
         count++
     } else if (sym == '-' && count > 0) {
         count--
@@ -69,35 +69,35 @@ function prepare(item) {
 
 
 
-const headerTimer= document.querySelector('.header__timer span')
+const headerTimer = document.querySelector('.header__timer span')
 
-let lvl =headerTimer.innerHTML=0
-function str(lvl=0) {
+let lvl = headerTimer.innerHTML = 0
+function str(lvl = 0) {
     lvl++
 
     if (lvl <= 50) {
         setTimeout(() => {
             str(lvl)
             console.log(lvl)
-            headerTimer.innerHTML=0+lvl
+            headerTimer.innerHTML = 0 + lvl
         }, 1);
-    }else if (lvl <= 70) {
+    } else if (lvl <= 70) {
         setTimeout(() => {
             str(lvl)
             console.log(lvl)
-            headerTimer.innerHTML=0+lvl
+            headerTimer.innerHTML = 0 + lvl
         }, 10);
-    }else if (lvl <= 90) {
+    } else if (lvl <= 90) {
         setTimeout(() => {
             str(lvl)
             console.log(lvl)
-            headerTimer.innerHTML=0+lvl
+            headerTimer.innerHTML = 0 + lvl
         }, 100);
-    }else if (lvl <= 100) {
+    } else if (lvl <= 100) {
         setTimeout(() => {
             str(lvl)
             console.log(lvl)
-            headerTimer.innerHTML=0+lvl
+            headerTimer.innerHTML = 0 + lvl
         }, 1000);
     }
 }
@@ -119,3 +119,42 @@ str()
 // let a =20;
 
 // var b =10;
+
+const receipt = document.querySelector('.receipt')
+const receiptWindow = document.querySelector('.receipt__window')
+const receiptWindowOut = document.querySelector('.receipt__window-out')
+const receiptWindowBtn = document.querySelector('.receipt__window-btn')
+const addCart = document.querySelector('.addCart')
+
+console.log(addCart)
+
+addCart.addEventListener('click', function () {
+    receipt.style.display = 'block'
+    receiptWindow.style.top = '20%'
+    setTimeout(() => {
+        receipt.style.opacity = 1
+    }, 100);
+    let menu = "Sizning chekingiz: \n\n";
+    let totalPrise = 0;
+    let totalKcall = 0;
+
+    for (const key in food) {
+        menu = menu + `${food[key].name} ${food[key].amout}x ${food[key].price}=${food[key].calcSum}\n \n`
+        totalPrise = totalPrise + food[key].calcSum
+        totalKcall = totalKcall + food[key].kcallSum
+    }
+    receiptWindowOut.innerHTML = `${menu} \n Total price: ${totalPrise} \n Total kcall: ${totalKcall}`
+})
+
+receiptWindowBtn.addEventListener('click',function (e) {
+    location.reload()
+    if (e.target) {
+        receiptWindow.style.top ="-100%"
+        setTimeout(() => {
+            receipt.style.display ='none'
+            receipt.style.opacity ='0'
+        }, 500);
+    }
+})
+
+

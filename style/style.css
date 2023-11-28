@@ -288,6 +288,7 @@ a {
     align-items: center;
     transition: 0.5s;
     top: -100%;
+    left: 35%;
     position: absolute;
 }
 .receipt__window-out {
